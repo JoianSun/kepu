@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>科普法每日学习</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#1a2a6c">
+    <meta name="theme-color" content="#0a192f">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
         :root {
-            --primary-color: #1a2a6c;
-            --secondary-color: #b21f1f;
-            --background-color: #f4f4f8;
+            --primary-color: #0a192f;
+            --secondary-color: #2a9d8f;
+            --background-color: #f0f4f8;
             --text-color: #2c3e50;
             --card-background: rgba(255, 255, 255, 0.98);
         }
@@ -31,7 +31,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(135deg, var(--primary-color), #112240);
             color: var(--text-color);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
@@ -47,7 +47,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color), #112240);
             color: white;
             padding: 20px;
             text-align: center;
@@ -60,6 +60,16 @@
         .header h1 {
             font-size: 1.5rem;
             font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .law-info {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            line-height: 1.4;
+            max-width: 90%;
+            margin: 0 auto;
         }
 
         .quiz-card {
@@ -68,6 +78,11 @@
             margin: 15px;
             padding: 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .quiz-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .question {
@@ -82,29 +97,68 @@
         }
 
         .answer-option {
-            display: flex;
-            align-items: center;
-            background-color: var(--background-color);
-            border-radius: 10px;
-            padding: 15px;
             margin-bottom: 10px;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .answer-option:hover {
-            background-color: rgba(26, 42, 108, 0.05);
-            transform: translateX(5px);
-        }
-
-        .answer-option input {
-            margin-right: 15px;
-            transform: scale(1.2);
+        .answer-option input[type="radio"] {
+            display: none;
         }
 
         .answer-option label {
+            display: block;
+            padding: 12px 15px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .answer-option input[type="radio"]:checked + label {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--secondary-color);
+            transform: scale(1.02);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .answer-option label:hover {
+            background-color: #e0e0e0;
+            transform: scale(1.01);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .btn {
             flex-grow: 1;
-            font-size: 1rem;
+            margin: 0 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .progress-container {
@@ -117,40 +171,8 @@
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(45deg, var(--primary-color), #112240);
             transition: width 0.5s ease;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .btn {
-            flex-grow: 1;
-            margin: 0 5px;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-            opacity: 0.8;
         }
 
         .result-card {
@@ -159,6 +181,11 @@
             background-color: white;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .result-card:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .result-score {
@@ -167,14 +194,11 @@
             font-weight: bold;
         }
 
-        .result-details {
-            margin-top: 20px;
-        }
-
         .result-item {
             margin-bottom: 20px;
             padding: 20px;
             border-bottom: 1px solid #ddd;
+            transition: background-color 0.2s ease;
         }
 
         .result-item:last-child {
@@ -189,51 +213,316 @@
             background-color: #f2dede;
         }
 
-        .question-text {
-            font-size: 1.1rem;
+        .result-item:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        .result-message {
+            font-size: 1.2rem;
             color: var(--primary-color);
-            margin-bottom: 15px;
-            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .result-details {
+            background-color: var(--background-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         .user-answer {
-            font-size: 1rem;
             margin-bottom: 10px;
+            padding: 10px;
+            background-color: var(--background-color);
+            border-radius: 5px;
         }
 
         .user-answer.correct {
-            color: #3c763d;
+            color: var(--secondary-color);
         }
 
         .user-answer.incorrect {
-            color: #a94442;
+            color: #e76f51;
         }
 
         .correct-answer {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: #666;
+            font-weight: bold;
+            color: var(--secondary-color);
         }
 
         .explanation {
-            font-size: 1rem;
-            color: #666;
+            font-size: 0.9rem;
+            color: #6a7280;
+            margin-top: 10px;
+            line-height: 1.5;
         }
 
         .full-width-btn {
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .mt-3 {
-            margin-top: 1rem;
+        .full-width-btn i {
+            margin-right: 10px;
         }
 
-        .mr-2 {
-            margin-right: 0.5rem;
+        .result-section {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--background-color);
+        }
+
+        .result-summary {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .score-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .score-value {
+            font-size: 64px;
+            font-weight: bold;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 16px;
+            color: #6c757d;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            min-width: 100px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .stat-value.correct {
+            color: #28a745;
+        }
+
+        .stat-value.incorrect {
+            color: #dc3545;
+        }
+
+        .detailed-results {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .results-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+
+        .results-section h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .no-incorrect {
+            text-align: center;
+            color: #28a745;
+            font-size: 16px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+
+        .result-item.incorrect {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .result-item .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .result-item .question-number {
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .result-item .question-result {
+            font-size: 14px;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .result-item .question-result.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .result-item .question-text {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .result-item .answer-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .result-item .user-answer,
+        .result-item .correct-answer {
+            background-color: white;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .result-item .user-answer span.incorrect {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .result-item .correct-answer span {
+            color: #28a745;
+        }
+
+        .result-item .question-explanation {
+            background-color: #e9ecef;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .result-item .study-guidance {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .result-item .advice-text {
+            text-align: center;
+            color: #6c757d;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .result-item .btn {
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .result-item .btn:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            .result-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .result-item .answer-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .study-guidance {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .study-guidance .btn-sm {
+            font-size: 14px;
+            padding: 5px 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .study-guidance .btn-sm:hover {
+            background-color: color-mix(in srgb, var(--secondary-color) 80%, white);
+        }
+
+        .study-advice {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .study-advice h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         @media (max-width: 768px) {
@@ -256,324 +545,559 @@
                 font-size: 1rem;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        .result-summary {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .score-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .score-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 16px;
+            color: var(--secondary-color);
+            margin-top: 5px;
+        }
+
+        .result-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-details p {
+            margin: 5px 0;
+            font-size: 15px;
+            color: #333;
+        }
+
+        @media (max-width: 480px) {
+            .result-summary {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .score-badge {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        .detailed-results {
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .result-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 15px 0;
+            margin-bottom: 0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .question-number {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .question-result {
+            font-size: 14px;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .question-result.correct {
+            background-color: #e7f3fe;
+            color: #0d6efd;
+        }
+
+        .question-result.incorrect {
+            background-color: #fff3cd;
+            color: #ffc107;
+        }
+
+        .question-text {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .answer-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-answer, .correct-answer {
+            margin-bottom: 8px;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .user-answer span, .correct-answer span {
+            margin-left: 10px;
+        }
+
+        .user-answer span.incorrect {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .user-answer span.correct {
+            color: #198754;
+            font-weight: bold;
+        }
+
+        .correct-answer span {
+            color: #198754;
+        }
+
+        .question-explanation {
+            background-color: #f1f3f5;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #495057;
+        }
+
+        .study-guidance {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .study-guidance .btn {
+            display: inline-block;
+            background-color: #0d6efd;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .detailed-results {
+                margin: 10px;
+                padding: 10px;
+            }
+        }
+
+        .answer-option {
+            position: relative;
+            transition: background-color 0.3s ease;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .answer-option.correct {
+            background-color: #e6f3e6;
+            border-color: #4CAF50;
+        }
+        
+        .answer-option.incorrect {
+            background-color: #f3e6e6;
+            border-color: #F44336;
+        }
+        
+        .answer-option.correct::after,
+        .answer-option.incorrect::after {
+            content: '';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .answer-option.correct::after {
+            background-color: #4CAF50;
+            content: '✓';
+            color: white;
+            text-align: center;
+            line-height: 20px;
+        }
+        
+        .answer-option.incorrect::after {
+            background-color: #F44336;
+            content: '✗';
+            color: white;
+            text-align: center;
+            line-height: 20px;
+        }
+        
+        .feedback {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .feedback.correct {
+            background-color: #e6f3e6;
+            color: #4CAF50;
+        }
+        
+        .feedback.incorrect {
+            background-color: #f3e6e6;
+            color: #F44336;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .science-law-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .science-law-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="mobile-container">
         <header class="header">
-            <h1>科普法每日学习</h1>
+            <h1>中华人民共和国科学技术普及法</h1>
+            <p class="law-info">
+                （2002年6月29日第九届全国人民代表大会常务委员会第二十八次会议通过　
+                2024年12月25日第十四届全国人民代表大会常务委员会第十三次会议修订）
+            </p>
         </header>
 
         <div id="quiz-container" class="quiz-card">
+            <div class="quiz-header">
+                <div id="question-number" class="question-number">题号</div>
+                <div id="question-text" class="question-text">题目加载中...</div>
+            </div>
+            <div id="answers-container" class="answers-container"></div>
+            <div id="answer-feedback" class="answer-feedback"></div>
             <div class="progress-container">
-                <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                <div id="progress-bar" class="progress-bar"></div>
             </div>
+        </div>
 
-            <div id="question-section">
-                <div class="question">
-                    <h3 class="question-text" id="question-text">加载题目中...</h3>
-                    <div id="answers-container">
-                        <!-- 动态生成答案选项 -->
-                    </div>
-                </div>
+        <script src="js/questions.js"></script>
+        <script>
+            class QuizApp {
+                constructor() {
+                    this.startTime = null;
+                    this.elapsedTime = 0;
+                    this.timerInterval = null;
+                    this.initElements();
+                    this.initEventListeners();
+                    this.initQuiz();
+                    this.startTimer();
+                }
 
-                <div class="button-group">
-                    <button id="prev-btn" class="btn btn-secondary">上一题</button>
-                    <button id="next-btn" class="btn btn-primary">下一题</button>
-                </div>
-            </div>
+                initElements() {
+                    this.quizContainer = document.getElementById('quiz-container');
+                    this.questionText = document.getElementById('question-text');
+                    this.answersContainer = document.getElementById('answers-container');
+                    this.answerFeedback = document.getElementById('answer-feedback');
+                    this.progressBar = document.getElementById('progress-bar');
+                }
 
-            <div id="result-section" class="result-card" style="display: none;">
-                <h2>测试结果</h2>
-                <div class="result-score" id="final-score">0</div>
-                <p id="result-message">继续加油！</p>
-                <div id="result-details"></div>
-                <div class="button-group mt-3">
-                    <a href="kepufa.html" class="btn btn-primary full-width-btn">
-                        <i class="fas fa-book-open mr-2"></i>学习科普法全文
-                    </a>
-                </div>
+                initEventListeners() {
+                    // 保留一个空的方法，以满足构造函数调用
+                    // 如果需要添加全局事件监听器，可以在这里添加
+                }
+
+                shuffleArray(array) {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                }
+
+                getRandomQuestions(count) {
+                    const allQuestions = window.questions || [];
+                    const shuffledQuestions = this.shuffleArray([...allQuestions]);
+                    return shuffledQuestions.slice(0, count);
+                }
+
+                initQuiz() {
+                    this.questions = this.getRandomQuestions(10);
+                    this.currentQuestionIndex = 0;
+                    this.userAnswers = [];
+
+                    this.loadQuestion();
+                    this.updateProgressBar();
+                }
+
+                loadQuestion() {
+                    if (this.currentQuestionIndex >= this.questions.length) {
+                        this.finishQuiz();
+                        return;
+                    }
+
+                    const currentQuestion = this.questions[this.currentQuestionIndex];
+                    
+                    document.getElementById('question-number').textContent = `第 ${this.currentQuestionIndex + 1} 题`;
+                    this.questionText.textContent = currentQuestion.question;
+                    
+                    this.answerFeedback.innerHTML = '';
+                    
+                    this.answersContainer.innerHTML = currentQuestion.options.map((option, index) => `
+                        <div class="answer-option">
+                            <input 
+                                type="radio" 
+                                name="answer" 
+                                id="option${index}" 
+                                value="${option}"
+                                data-index="${index}"
+                            >
+                            <label for="option${index}">${option}</label>
+                        </div>
+                    `).join('');
+
+                    const radioInputs = this.answersContainer.querySelectorAll('input[type="radio"]');
+                    radioInputs.forEach(input => {
+                        input.addEventListener('change', (event) => {
+                            radioInputs.forEach(radio => radio.disabled = true);
+
+                            const selectedInput = event.target;
+                            const selectedIndex = parseInt(selectedInput.dataset.index);
+                            const correctIndex = currentQuestion.correct;
+                            const isCorrect = selectedIndex === correctIndex;
+
+                            this.answersContainer.querySelectorAll('.answer-option').forEach(option => {
+                                option.classList.remove('correct', 'incorrect');
+                            });
+
+                            const selectedOption = selectedInput.closest('.answer-option');
+                            const correctOption = this.answersContainer.querySelector(`input[data-index="${correctIndex}"]`).closest('.answer-option');
+
+                            if (isCorrect) {
+                                selectedOption.style.backgroundColor = 'lightgreen';
+                                this.answerFeedback.innerHTML = `
+                                    <div style="color: green; font-weight: bold;">
+                                        回答正确！
+                                    </div>
+                                `;
+                            } else {
+                                selectedOption.style.backgroundColor = 'lightcoral';
+                                correctOption.style.backgroundColor = 'lightgreen';
+                                this.answerFeedback.innerHTML = `
+                                    <div style="color: red; font-weight: bold;">
+                                        回答错误！正确答案是：${currentQuestion.options[correctIndex]}
+                                    </div>
+                                `;
+                            }
+
+                            this.userAnswers.push({
+                                question: currentQuestion.question,
+                                userAnswer: selectedInput.value,
+                                correctAnswer: currentQuestion.options[correctIndex],
+                                isCorrect: isCorrect
+                            });
+
+                            setTimeout(() => {
+                                this.currentQuestionIndex++;
+                                if (this.currentQuestionIndex >= this.questions.length) {
+                                    this.finishQuiz();
+                                } else {
+                                    this.loadQuestion();
+                                }
+                            }, 1500);
+                        });
+                    });
+
+                    this.updateProgressBar();
+                }
+
+                finishQuiz() {
+                    this.stopTimer();
+                    
+                    const correctCount = this.userAnswers.filter(answer => answer.isCorrect).length;
+                    const totalQuestions = this.questions.length;
+                    const scorePercentage = Math.round((correctCount / totalQuestions) * 100);
+
+                    const resultModal = document.createElement('div');
+                    resultModal.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: #f9f9f9;
+                        padding: 30px;
+                        border-radius: 15px;
+                        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                        text-align: center;
+                        max-width: 400px;
+                        width: 90%;
+                        z-index: 1000;
+                        font-family: Arial, sans-serif;
+                    `;
+
+                    resultModal.innerHTML = `
+                        <div style="background-color: ${scorePercentage >= 60 ? '#e6f3e6' : '#f3e6e6'}; 
+                                    padding: 20px; 
+                                    border-radius: 10px; 
+                                    margin-bottom: 20px;">
+                            <h2 style="color: #333; margin-bottom: 15px;">测验结果</h2>
+                            <p style="font-size: 18px; color: #555;">
+                                你的成绩：<strong style="color: ${scorePercentage >= 60 ? '#4CAF50' : '#F44336'}">
+                                    ${correctCount} / ${totalQuestions}
+                                </strong>
+                            </p>
+                            <p style="font-size: 16px; color: #666;">
+                                正确率：<strong style="color: ${scorePercentage >= 60 ? '#4CAF50' : '#F44336'}">
+                                    ${scorePercentage}%
+                                </strong>
+                            </p>
+                            <p style="font-size: 16px; color: #666;">
+                                <a href="kepufa.html" target="_blank" style="color: #337ab7;">查看《中华人民共和国科学技术普及法》</a>
+                            </p>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; gap: 10px;">
+                            <button id="restart-quiz" style="
+                                flex-grow: 1; 
+                                padding: 10px; 
+                                background-color: #4CAF50; 
+                                color: white; 
+                                border: none; 
+                                border-radius: 5px; 
+                                cursor: pointer;
+                                transition: background-color 0.3s;
+                            " onmouseover="this.style.backgroundColor='#45a049'" 
+                               onmouseout="this.style.backgroundColor='#4CAF50'">
+                                再次测验
+                            </button>
+                            <button id="exit-quiz" style="
+                                flex-grow: 1; 
+                                padding: 10px; 
+                                background-color: #f44336; 
+                                color: white; 
+                                border: none; 
+                                border-radius: 5px; 
+                                cursor: pointer;
+                                transition: background-color 0.3s;
+                            " onmouseover="this.style.backgroundColor='#d32f2f'" 
+                               onmouseout="this.style.backgroundColor='#f44336'">
+                                退出
+                            </button>
+                        </div>
+                    `;
+
+                    document.body.appendChild(resultModal);
+
+                    document.getElementById('restart-quiz').addEventListener('click', () => {
+                        document.body.removeChild(resultModal);
+                        this.resetQuiz();
+                    });
+
+                    document.getElementById('exit-quiz').addEventListener('click', () => {
+                        alert('感谢参与测验！');
+                        document.body.removeChild(resultModal);
+                    });
+                }
+
+                resetQuiz() {
+                    this.questions = this.getRandomQuestions(10);
+                    this.currentQuestionIndex = 0;
+                    this.userAnswers = [];
+                    this.quizCompleted = false;
+                    this.startTime = null;
+                    this.elapsedTime = 0;
+                    this.startTimer();
+                    this.loadQuestion();
+                }
+
+                updateProgressBar() {
+                    const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
+                    this.progressBar.style.width = `${progress}%`;
+                }
+
+                startTimer() {
+                    this.startTime = new Date();
+                    this.timerInterval = setInterval(() => {
+                        const currentTime = new Date();
+                        this.elapsedTime = Math.floor((currentTime - this.startTime) / 1000);
+                    }, 1000);
+                }
+
+                stopTimer() {
+                    if (this.timerInterval) {
+                        clearInterval(this.timerInterval);
+                        this.timerInterval = null;
+                    }
+                }
+
+                getElapsedTime() {
+                    return this.elapsedTime;
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.questions && window.questions.length > 0) {
+                    new QuizApp();
+                } else {
+                    console.error('题目数据未成功加载');
+                    alert('题目加载失败，请刷新页面或检查网络连接');
+                }
+            });
+        </script>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p> 2024 科普法知识测验</p>
+                <a href="kepufa.html" class="science-law-link">了解《科学技术普及法》全文</a>
             </div>
         </div>
     </div>
-
-    <script>
-        // 科普法题库（扩展题目数量）
-        const allQuestions = [
-            {
-                text: "科学技术普及法的主要目的是什么？",
-                options: [
-                    "提高公民科学文化素质",
-                    "限制科技发展",
-                    "控制科技信息传播",
-                    "减少科技投资"
-                ],
-                correctAnswer: 0,
-                explanation: "科学技术普及法旨在提高全民科学素养，促进科学技术的普及和创新。"
-            },
-            {
-                text: "根据法律，每年9月被定为什么？",
-                options: [
-                    "科技创新月",
-                    "全国科普月",
-                    "技术发展月",
-                    "科学教育月"
-                ],
-                correctAnswer: 1,
-                explanation: "法律规定每年9月为全国科普月，旨在广泛开展科普活动。"
-            },
-            {
-                text: "科普法鼓励哪些主体参与科普工作？",
-                options: [
-                    "仅政府机构",
-                    "科研机构和教育机构",
-                    "政府、企业、社会组织和公民个人",
-                    "只有科学家和专家"
-                ],
-                correctAnswer: 2,
-                explanation: "科普法强调全社会共同参与科普工作的重要性。"
-            },
-            {
-                text: "科普法鼓励通过哪些方式开展科普活动？",
-                options: [
-                    "只能通过学术报告",
-                    "多种形式，如媒体、互联网、展览等",
-                    "仅限于书面宣传",
-                    "只能在学校进行"
-                ],
-                correctAnswer: 1,
-                explanation: "科普法支持多元化、多渠道的科普传播方式。"
-            },
-            {
-                text: "科普法特别强调对哪个群体的科普教育？",
-                options: [
-                    "仅针对成年人",
-                    "青少年和儿童",
-                    "老年人",
-                    "科研工作者"
-                ],
-                correctAnswer: 1,
-                explanation: "法律特别重视青少年和儿童的科学素养培养。"
-            },
-            {
-                text: "科普法规定，国家鼓励科技工作者做什么？",
-                options: [
-                    "只进行学术研究",
-                    "参与科普活动和科学传播",
-                    "保守科研成果",
-                    "仅在实验室工作"
-                ],
-                correctAnswer: 1,
-                explanation: "鼓励科技工作者积极参与科普活动，推广科学知识。"
-            },
-            {
-                text: "科普法对网络科普有什么要求？",
-                options: [
-                    "禁止网络科普",
-                    "鼓励利用互联网等新媒体开展科普",
-                    "仅允许官方网站科普",
-                    "网络科普需要特殊审批"
-                ],
-                correctAnswer: 1,
-                explanation: "法律支持并鼓励通过互联网等新媒体开展科普活动。"
-            },
-            {
-                text: "科普法如何保障科普经费？",
-                options: [
-                    "完全依赖社会捐赠",
-                    "国家和地方财政设立科普专项经费",
-                    "只依靠企业赞助",
-                    "不提供经费支持"
-                ],
-                correctAnswer: 1,
-                explanation: "国家和地方财政应当设立科普专项经费，支持科普事业发展。"
-            },
-            {
-                text: "科普法鼓励企业在科普中扮演什么角色？",
-                options: [
-                    "不需要参与科普",
-                    "可以自愿参与科普活动",
-                    "有义务开展科普活动",
-                    "只能提供资金支持"
-                ],
-                correctAnswer: 1,
-                explanation: "鼓励企业自愿参与科普活动，但不强制要求。"
-            },
-            {
-                text: "科普法对科普作品的创作有什么要求？",
-                options: [
-                    "只能由专家撰写",
-                    "鼓励科普作品创作，提高科普作品质量",
-                    "禁止科普作品出版",
-                    "科普作品需要政府审批"
-                ],
-                correctAnswer: 1,
-                explanation: "法律鼓励高质量科普作品的创作和传播。"
-            }
-        ];
-
-        class QuizApp {
-            constructor() {
-                this.totalQuestions = 10;
-                this.currentQuestionIndex = 0;
-                this.score = 0;
-                this.questions = [];
-                this.selectedAnswers = [];
-                this.startTime = Date.now();
-
-                this.questionText = document.getElementById('question-text');
-                this.answersContainer = document.getElementById('answers-container');
-                this.prevBtn = document.getElementById('prev-btn');
-                this.nextBtn = document.getElementById('next-btn');
-                this.progressBar = document.getElementById('progress-bar');
-                this.questionSection = document.getElementById('question-section');
-                this.resultSection = document.getElementById('result-section');
-                this.finalScoreElement = document.getElementById('final-score');
-                this.resultMessageElement = document.getElementById('result-message');
-                this.detailsContainer = document.getElementById('result-details');
-
-                this.initQuiz();
-                this.initEventListeners();
-                this.loadQuestion();
-            }
-
-            initQuiz() {
-                // 随机抽取10道题目
-                const shuffledQuestions = this.shuffleArray(allQuestions);
-                this.questions = shuffledQuestions.slice(0, this.totalQuestions);
-                this.selectedAnswers = new Array(this.totalQuestions).fill(null);
-            }
-
-            shuffleArray(array) {
-                const shuffled = [...array];
-                for (let i = shuffled.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-                }
-                return shuffled;
-            }
-
-            initEventListeners() {
-                this.prevBtn.addEventListener('click', () => this.navigateQuestion(-1));
-                this.nextBtn.addEventListener('click', () => this.navigateQuestion(1));
-            }
-
-            loadQuestion() {
-                const question = this.questions[this.currentQuestionIndex];
-                this.questionText.textContent = question.text;
-                this.answersContainer.innerHTML = '';
-
-                question.options.forEach((option, index) => {
-                    const answerOption = document.createElement('div');
-                    answerOption.classList.add('answer-option');
-                    
-                    const radio = document.createElement('input');
-                    radio.type = 'radio';
-                    radio.name = 'answer';
-                    radio.id = `option-${index}`;
-                    radio.value = index;
-
-                    const label = document.createElement('label');
-                    label.htmlFor = `option-${index}`;
-                    label.textContent = option;
-
-                    answerOption.appendChild(radio);
-                    answerOption.appendChild(label);
-
-                    answerOption.addEventListener('click', () => {
-                        radio.checked = true;
-                        this.selectedAnswers[this.currentQuestionIndex] = index;
-                    });
-
-                    this.answersContainer.appendChild(answerOption);
-                });
-
-                // 更新进度条
-                const progress = ((this.currentQuestionIndex + 1) / this.totalQuestions) * 100;
-                this.progressBar.style.width = `${progress}%`;
-
-                // 恢复之前的选择
-                const previousAnswer = this.selectedAnswers[this.currentQuestionIndex];
-                if (previousAnswer !== null) {
-                    const radioToCheck = document.getElementById(`option-${previousAnswer}`);
-                    if (radioToCheck) radioToCheck.checked = true;
-                }
-
-                // 控制上一题/下一题按钮
-                this.prevBtn.disabled = this.currentQuestionIndex === 0;
-                this.nextBtn.textContent = this.currentQuestionIndex === this.totalQuestions - 1 ? '完成' : '下一题';
-            }
-
-            navigateQuestion(direction) {
-                if (direction > 0 && this.currentQuestionIndex === this.totalQuestions - 1) {
-                    this.finishQuiz();
-                    return;
-                }
-
-                this.currentQuestionIndex = Math.max(0, Math.min(this.totalQuestions - 1, this.currentQuestionIndex + direction));
-                this.loadQuestion();
-            }
-
-            finishQuiz() {
-                this.calculateScore();
-                this.questionSection.style.display = 'none';
-                this.resultSection.style.display = 'block';
-                this.showDetailedResults();
-            }
-
-            calculateScore() {
-                this.score = this.selectedAnswers.reduce((total, answer, index) => {
-                    return answer === this.questions[index].correctAnswer ? total + 1 : total;
-                }, 0);
-
-                const scorePercentage = Math.round((this.score / this.totalQuestions) * 100);
-                const timeTaken = Math.round((Date.now() - this.startTime) / 60000);
-
-                this.finalScoreElement.textContent = `${this.score}/${this.totalQuestions}`;
-                
-                if (scorePercentage >= 80) {
-                    this.resultMessageElement.textContent = '非常优秀！你对科普法有深入了解。';
-                } else if (scorePercentage >= 60) {
-                    this.resultMessageElement.textContent = '不错的成绩，继续加油！';
-                } else {
-                    this.resultMessageElement.textContent = '建议再多学习科普法知识。';
-                }
-            }
-
-            showDetailedResults() {
-                const detailsContainer = document.createElement('div');
-                detailsContainer.classList.add('result-details');
-
-                this.questions.forEach((question, index) => {
-                    const resultItem = document.createElement('div');
-                    resultItem.classList.add('result-item');
-
-                    const isCorrect = this.selectedAnswers[index] === question.correctAnswer;
-                    resultItem.classList.add(isCorrect ? 'correct' : 'incorrect');
-
-                    resultItem.innerHTML = `
-                        <h4>第 ${index + 1} 题</h4>
-                        <p class="question-text">${question.text}</p>
-                        <p class="user-answer ${isCorrect ? 'correct' : 'incorrect'}">
-                            你的答案：${question.options[this.selectedAnswers[index]]}
-                        </p>
-                        <p class="correct-answer">
-                            正确答案：${question.options[question.correctAnswer]}
-                        </p>
-                        <p class="explanation">${question.explanation}</p>
-                    `;
-
-                    detailsContainer.appendChild(resultItem);
-                });
-
-                this.resultSection.appendChild(detailsContainer);
-            }
-        }
-
-        // 初始化应用
-        document.addEventListener('DOMContentLoaded', () => {
-            new QuizApp();
-        });
-    </script>
 </body>
 </html>
