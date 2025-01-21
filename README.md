@@ -1,49 +1,72 @@
-# 科普法学习系统
+# 《科学技术普及法》知识测试应用
 
-这是一个基于2024年12月25日新修订的《中华人民共和国科普法》的在线学习答题系统。
+## 项目简介
+本项目是一个基于 HTML、CSS 和 JavaScript 的交互式在线测试应用，旨在帮助用户学习和了解《中华人民共和国科学技术普及法》的重要内容。
 
 ## 功能特点
-
-1. 现代简约的界面设计，富有科技感
-2. 完整的题库系统（100+道题目）
-3. 随机抽题功能（每次10题）
-4. 智能评分系统
-5. 详细的法条解析
-
-## 项目结构
-
-```
-kepufa/
-├── README.md           # 项目说明文档
-├── index.html         # 主页面
-├── css/              # 样式文件
-│   └── style.css     # 主样式表
-├── js/               # JavaScript文件
-│   ├── main.js       # 主要逻辑
-│   └── questions.js  # 题库数据
-└── assets/           # 静态资源
-    └── images/       # 图片资源
-```
-
-## 使用说明
-
-1. 打开index.html即可开始答题
-2. 系统会随机抽取10道题目
-3. 完成答题后点击提交
-4. 系统会自动评分并显示详细解析
+- 随机抽取10道科普法知识测试题
+- 交互式答题界面，支持移动端和桌面端
+- 实时答题进度追踪
+- 答题结束后提供详细成绩报告
+- 可分享测试成绩
+- 响应式设计，兼容多种设备
 
 ## 技术栈
-
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript (原生)
 - Bootstrap 5
 
-## 维护说明
+## 项目目录结构
+```
+kepufa/
+│
+├── index.html         # 主页面
+├── kepufa.html        # 科普法全文页面
+│
+├── css/
+│   ├── bootstrap.min.css
+│   ├── all.min.css
+│   └── style.css
+│
+├── js/
+│   ├── bootstrap.bundle.min.js
+│   ├── main.js
+│   └── questions.js
+│
+├── webfonts/          # Font Awesome 字体文件
+│   ├── fa-solid-900.ttf
+│   ├── fa-solid-900.woff2
+│   └── ...
+│
+└── README.md
+```
 
-题库位于js/questions.js文件中，可以根据需要进行扩充或修改。每个题目包含：
-- 题目内容
-- 选项
-- 正确答案
-- 法条依据
-- 详细解析
+## 快速开始
+1. 克隆仓库
+```bash
+git clone https://github.com/yourusername/kepufa-quiz.git
+```
+
+2. 直接打开 `index.html` 即可开始测试
+
+## 主要功能截图
+[可以添加应用截图]
+
+## 贡献指南
+1. Fork 本仓库
+2. 创建您的特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交您的修改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 提交 Pull Request
+
+## 许可证
+本项目基于 MIT 许可证开源 - 详见 LICENSE 文件
+
+## 联系方式
+如有任何问题，请提交 Issue 或联系项目维护者。
+
+## 致谢
+- Bootstrap 团队
+- Font Awesome
+- 所有为科学技术普及事业做出贡献的人们

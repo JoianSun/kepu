@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中华人民共和国科学技术普及法</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #1e1e2f 0%, #2c2c54 100%);
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(25, 118, 210, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(41, 98, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1976d2 0%, #2962ff 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header .info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .law-info {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .table-of-contents {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #1976d2;
+        }
+        
+        .table-of-contents h2 {
+            color: #1976d2;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .table-of-contents li {
+            margin-bottom: 0.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .table-of-contents li:hover {
+            color: #1976d2;
+        }
+        
+        .chapter {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .chapter-title {
+            color: #1976d2;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(25, 118, 210, 0.1);
+            font-weight: bold;
+        }
+        
+        .article {
+            margin-bottom: 1.2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+        
+        .article:hover {
+            transform: translateX(5px);
+            background: #f1f3f5;
+        }
+        
+        .article-number {
+            font-weight: bold;
+            color: #1976d2;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #1976d2;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            z-index: 100;
+        }
+        
+        .back-to-top:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .chapter {
+                padding: 1rem;
+            }
+            
+            .article {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>中华人民共和国科学技术普及法</h1>
+        <div class="info">
+            （2002年6月29日第九届全国人民代表大会常务委员会第二十八次会议通过　2024年12月25日第十四届全国人民代表大会常务委员会第十三次会议修订）
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="table-of-contents">
+            <h2>目　　录</h2>
+            <ul>
+                <li onclick="scrollToChapter('chapter1')">第一章　总　　则</li>
+                <li onclick="scrollToChapter('chapter2')">第二章　组织管理</li>
+                <li onclick="scrollToChapter('chapter3')">第三章　社会责任</li>
+                <li onclick="scrollToChapter('chapter4')">第四章　科普活动</li>
+                <li onclick="scrollToChapter('chapter5')">第五章　科普人员</li>
+                <li onclick="scrollToChapter('chapter6')">第六章　保障措施</li>
+                <li onclick="scrollToChapter('chapter7')">第七章　法律责任</li>
+                <li onclick="scrollToChapter('chapter8')">第八章　附　　则</li>
+            </ul>
+        </div>
+
+        <div id="chapter1" class="chapter">
+            <div class="chapter-title">第一章　总　　则</div>
+            <div class="article">
+                <span class="article-number">第一条</span>　为了实施科教兴国战略、人才强国战略和创新驱动发展战略，全面促进科学技术普及，加强国家科学技术普及能力建设，提高公民的科学文化素质，推进实现高水平科技自立自强，推动经济发展和社会进步，根据宪法，制定本法。
+            </div>
+            <div class="article">
+                <span class="article-number">第二条</span>　本法适用于国家和社会普及科学技术知识、倡导科学方法、传播科学思想、弘扬科学精神的活动。开展科学技术普及（以下简称科普），应当采取公众易于接触、理解、接受、参与的方式。
+            </div>
+            <div class="article">
+                <span class="article-number">第三条</span>　坚持中国共产党对科普事业的全面领导。开展科普，应当以人民为中心，坚持面向世界科技前沿、面向经济主战场、面向国家重大需求、面向人民生命健康，培育和弘扬创新文化，推动形成崇尚科学、追求创新的风尚，服务高质量发展，为建设科技强国奠定坚实基础。
+            </div>
+            <div class="article">
+                <span class="article-number">第四条</span>　科普是国家创新体系的重要组成部分，是实现创新发展的基础性工作。国家把科普放在与科技创新同等重要的位置，加强科普工作总体布局、统筹部署，推动科普与科技创新紧密协同，充分发挥科普在一体推进教育科技人才事业发展中的作用。
+            </div>
+            <!-- 其他条款 -->
+        </div>
+
+        <div id="chapter2" class="chapter">
+            <div class="chapter-title">第二章　组织管理</div>
+            <!-- 第二章内容 -->
+        </div>
+
+        <div id="chapter3" class="chapter">
+            <div class="chapter-title">第三章　社会责任</div>
+            <!-- 第三章内容 -->
+        </div>
+
+        <!-- 其他章节 -->
+    </div>
+
+    <a href="#" class="back-to-top" title="返回顶部">↑</a>
+
+    <script>
+        // 返回顶部按钮显示/隐藏
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 100) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // 目录点击滚动
+        function scrollToChapter(chapterId) {
+            const chapter = document.getElementById(chapterId);
+            if (chapter) {
+                chapter.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // 初始化隐藏返回顶部按钮
+        backToTop.style.display = 'none';
+    </script>
+</body>
+</html>
