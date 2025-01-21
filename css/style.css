@@ -93,6 +93,30 @@ body {
     font-size: 0.9em;
 }
 
+.form-check {
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.form-check:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+    transform: scale(1.02);
+}
+
+.form-check.selected {
+    background-color: #2196F3;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: scale(1.03);
+}
+
+.form-check.selected .form-check-label {
+    color: white;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
