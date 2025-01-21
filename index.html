@@ -2,608 +2,578 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>《科普法》知识测试</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>科普法每日学习</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a2a6c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
-        body {
+        :root {
+            --primary-color: #1a2a6c;
+            --secondary-color: #b21f1f;
+            --background-color: #f4f4f8;
+            --text-color: #2c3e50;
+            --card-background: rgba(255, 255, 255, 0.98);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #1e1e2f 0%, #2c2c54 100%);
-            min-height: 100vh;
-            color: #333;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            height: 100%;
+            overscroll-behavior-y: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-color);
             line-height: 1.6;
-            position: relative;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(25, 118, 210, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(41, 98, 255, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        
-        .container {
-            max-width: 800px;
+
+        .mobile-container {
+            max-width: 600px;
             margin: 0 auto;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
             padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .card {
-            background: rgba(255, 255, 255, 0.98);
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #1976d2, #2962ff);
-        }
-        
-        .text-center { text-align: center; }
-        .my-3 { margin-top: 1rem; margin-bottom: 1rem; }
-        .my-5 { margin-top: 3rem; margin-bottom: 3rem; }
-        .mb-4 { margin-bottom: 1.5rem; }
-        .d-none { display: none !important; }
-        .d-flex { display: flex; }
-        .justify-content-between { justify-content: space-between; }
-        .gap-2 { gap: 0.5rem; }
-        
-        .btn {
-            display: inline-block;
-            font-weight: 500;
             text-align: center;
-            vertical-align: middle;
-            user-select: none;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-size: 1rem;
-            line-height: 1.5;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .btn:hover::after {
-            width: 300%;
-            height: 300%;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
-            color: white;
-            box-shadow: 0 4px 15px rgba(26, 42, 108, 0.2);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(45deg, #2c3e50, #3498db);
-            color: white;
-            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.2);
-        }
-        
-        .btn-success {
-            background: linear-gradient(45deg, #27ae60, #2ecc71);
-            color: white;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.2);
-        }
-        
-        .btn-outline-primary {
-            color: #1a2a6c;
-            border: 2px solid #1a2a6c;
-            background: transparent;
-        }
-        
-        .progress {
-            height: 10px;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .progress-bar {
-            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
-            height: 100%;
-            transition: width 0.6s ease;
-            position: relative;
-        }
-        
-        .progress-bar::after {
-            content: '';
-            position: absolute;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.2) 50%,
-                rgba(255, 255, 255, 0) 100%
-            );
-            animation: shimmer 2s infinite;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
         }
-        
-        .form-check {
-            margin-bottom: 1rem;
-            padding: 1.2rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.8);
+
+        .quiz-card {
+            background-color: white;
+            border-radius: 15px;
+            margin: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            background-color: var(--background-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.1);
             cursor: pointer;
         }
-        
-        .form-check:hover {
-            background: rgba(255, 255, 255, 0.95);
+
+        .answer-option:hover {
+            background-color: rgba(26, 42, 108, 0.05);
             transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
-        .form-check-input {
-            margin-right: 1rem;
+
+        .answer-option input {
+            margin-right: 15px;
             transform: scale(1.2);
         }
-        
-        .form-check-label {
-            font-size: 1.1rem;
-            color: #2c3e50;
+
+        .answer-option label {
+            flex-grow: 1;
+            font-size: 1rem;
         }
-        
-        .question h4 {
-            color: #1a2a6c;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid rgba(26, 42, 108, 0.1);
+
+        .progress-container {
+            background-color: #f0f0f0;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
         }
-        
-        .display-4 {
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.5s ease;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex-grow: 1;
+            margin: 0 5px;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
             color: white;
             font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
-        
-        .lead {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
         }
-        
-        .review-item {
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-            background: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+        .btn-secondary {
+            background: #6c757d;
         }
-        
-        .review-item.correct {
-            border-left: 4px solid #4caf50;
+
+        .btn:active {
+            transform: scale(0.95);
+            opacity: 0.8;
         }
-        
-        .review-item.incorrect {
-            border-left: 4px solid #f44336;
+
+        .result-card {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
-        .review-item h5 {
-            color: #1976d2;
-            margin-bottom: 1.5rem;
-            font-size: 1.4rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        
-        .answers-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background: #f5f5f5;
-            border-radius: 8px;
-            font-size: 1.2rem;
-        }
-        
-        .answer-icon {
-            font-size: 1.5rem;
+
+        .result-score {
+            font-size: 3rem;
+            color: var(--primary-color);
             font-weight: bold;
-            min-width: 30px;
         }
-        
-        .answer-icon.correct {
-            color: #4caf50;
+
+        .result-details {
+            margin-top: 20px;
         }
-        
-        .answer-icon.incorrect {
-            color: #f44336;
+
+        .result-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
         }
-        
-        .answer-text {
-            flex-grow: 1;
-            color: #333;
+
+        .result-item:last-child {
+            border-bottom: none;
         }
-        
-        .law-reference {
-            margin-top: 1rem;
-            padding: 0.8rem;
-            background: #f8f9fa;
-            border-radius: 4px;
-            border-left: 3px solid #ff9800;
+
+        .result-item.correct {
+            background-color: #dff0d8;
         }
-        
-        .law-reference h6 {
-            color: #666;
-            margin: 0;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-right: 0.5rem;
-            font-weight: normal;
+
+        .result-item.incorrect {
+            background-color: #f2dede;
         }
-        
-        .law-content {
-            display: inline;
-            font-size: 0.85rem;
-            color: #555;
+
+        .question-text {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
             line-height: 1.5;
         }
-        
-        /* 测试结果样式 */
-        #results-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        .user-answer {
+            font-size: 1rem;
+            margin-bottom: 10px;
         }
 
-        #results-container h2 {
-            color: #1976d2;
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 1.8rem;
+        .user-answer.correct {
+            color: #3c763d;
         }
 
-        #score-display {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-radius: 8px;
+        .user-answer.incorrect {
+            color: #a94442;
         }
 
-        #score-display h3 {
-            color: #1565c0;
-            font-size: 2rem;
-            margin: 0;
+        .correct-answer {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #666;
         }
 
-        .review-item {
-            background: #fff;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid transparent;
-            transition: transform 0.2s ease;
+        .explanation {
+            font-size: 1rem;
+            color: #666;
         }
 
-        .review-item:hover {
-            transform: translateX(5px);
+        .full-width-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
         }
 
-        .review-item.correct {
-            border-left-color: #4caf50;
+        .mt-3 {
+            margin-top: 1rem;
         }
 
-        .review-item.incorrect {
-            border-left-color: #f44336;
-        }
-
-        .review-item h5 {
-            color: #1976d2;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .answer {
-            margin: 0.8rem 0;
-            padding: 0.8rem;
-            border-radius: 4px;
-            background: #f5f5f5;
-            font-size: 0.95rem;
-        }
-
-        .answer strong {
-            color: #1976d2;
+        .mr-2 {
             margin-right: 0.5rem;
         }
 
-        .user-answer.correct strong {
-            color: #4caf50;
-        }
-
-        .user-answer.incorrect strong {
-            color: #f44336;
-        }
-
-        .correct-answer strong {
-            color: #4caf50;
-        }
-
-        .law-reference {
-            margin-top: 0.8rem;
-            padding: 0.8rem;
-            background: #f8f9fa;
-            border-radius: 4px;
-            border-left: 3px solid #ff9800;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .retry-button {
-            display: block;
-            width: 200px;
-            margin: 2rem auto 0;
-            padding: 1rem;
-            background: #1976d2;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .retry-button:hover {
-            background: #1565c0;
-        }
-        
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            .card {
-                margin: 10px;
-                border-radius: 10px;
-            }
-            .display-4 {
-                font-size: 1.8rem;
-            }
-            .btn {
+            .mobile-container {
                 width: 100%;
-                margin: 5px 0;
+                margin: 0;
+                box-shadow: none;
             }
-            .d-flex {
-                flex-direction: column;
+
+            .header h1 {
+                font-size: 1.2rem;
             }
-        }
-        
-        /* 新增样式 */
-        .results-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .score-card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        .score-circle {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #1565c0;
-            margin-right: 2rem;
-        }
-        
-        .score-details {
-            font-size: 1.2rem;
-        }
-        
-        .detail-item {
-            margin-bottom: 1rem;
-        }
-        
-        .detail-label {
-            color: #666;
-        }
-        
-        .detail-value {
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .score-message {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        
-        .results-tabs {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        .tab-btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        
-        .tab-btn.active {
-            background: #1976d2;
-            color: white;
-        }
-        
-        .tab-btn:hover {
-            background: #1565c0;
-        }
-        
-        .answers-review {
-            margin-bottom: 2rem;
-        }
-        
-        .results-actions {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .retry-button {
-            margin: 0 auto;
-        }
-        
-        .share-button {
-            margin: 0 auto;
+
+            .quiz-card {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="text-center my-3 my-md-5">
-            <h1 class="display-4">每日学习科普法</h1>
-            <p class="lead" style="color: white;">基于2024年新修订《中华人民共和国科学技术普及法》</p>
-            <p><a href="https://flk.npc.gov.cn/detail2.html?ZmY4MDgxODE5MjdiMDgzYjAxOTNmZGE0YmVhZDAyZWU%3D" target="_blank" class="btn btn-outline-primary" style="background: rgba(255, 255, 255, 0.9);">查看科普法全文</a></p>
+    <div class="mobile-container">
+        <header class="header">
+            <h1>科普法每日学习</h1>
         </header>
 
-        <div class="card">
-            <div id="welcome-screen" class="text-center py-3 py-md-5">
-                <h2>欢迎参加科普法学习测试</h2>
-                <p>本测试共10道题目，将从题库中随机抽取</p>
-                <button id="start-btn" class="btn btn-primary btn-lg">开始答题</button>
+        <div id="quiz-container" class="quiz-card">
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
             </div>
 
-            <div id="quiz-container" class="d-none">
-                <div id="progress-container" class="mb-4">
-                    <div class="progress">
-                        <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%"></div>
-                    </div>
-                    <div class="text-end mt-2">
-                        <span id="question-counter">题目 0/10</span>
+            <div id="question-section">
+                <div class="question">
+                    <h3 class="question-text" id="question-text">加载题目中...</h3>
+                    <div id="answers-container">
+                        <!-- 动态生成答案选项 -->
                     </div>
                 </div>
 
-                <div id="question-container" class="mb-4"></div>
-
-                <div class="d-flex justify-content-between gap-2">
+                <div class="button-group">
                     <button id="prev-btn" class="btn btn-secondary">上一题</button>
                     <button id="next-btn" class="btn btn-primary">下一题</button>
-                    <button id="submit-btn" class="btn btn-success d-none">提交答案</button>
                 </div>
             </div>
 
-            <div id="results-container" class="container d-none">
-                <div class="results-header">
-                    <h2>测试结果</h2>
-                    <div class="score-card">
-                        <div class="score-circle">
-                            <span id="score">0</span>
-                            <small>分</small>
-                        </div>
-                        <div class="score-details">
-                            <div class="detail-item">
-                                <span class="detail-label">总题数：</span>
-                                <span class="detail-value">10</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">正确率：</span>
-                                <span class="detail-value"><span id="accuracy">0</span>%</span>
-                            </div>
-                            <div class="detail-item">
-                                <span class="detail-label">用时：</span>
-                                <span class="detail-value"><span id="time-used">0</span>分钟</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="score-message" id="score-message"></div>
-                </div>
-                
-                <div class="results-tabs">
-                    <button class="tab-btn active" data-tab="all">全部题目</button>
-                    <button class="tab-btn" data-tab="correct">答对题目</button>
-                    <button class="tab-btn" data-tab="incorrect">答错题目</button>
-                </div>
-
-                <div class="answers-review" id="answers-review">
-                    <!-- 答题详情将通过JavaScript动态插入 -->
-                </div>
-
-                <div class="results-actions">
-                    <button id="retry-btn" class="btn btn-primary retry-button">
-                        <i class="fas fa-redo"></i> 重新测试
-                    </button>
-                    <button id="share-btn" class="btn btn-outline-primary share-button">
-                        <i class="fas fa-share-alt"></i> 分享成绩
-                    </button>
+            <div id="result-section" class="result-card" style="display: none;">
+                <h2>测试结果</h2>
+                <div class="result-score" id="final-score">0</div>
+                <p id="result-message">继续加油！</p>
+                <div id="result-details"></div>
+                <div class="button-group mt-3">
+                    <a href="kepufa.html" class="btn btn-primary full-width-btn">
+                        <i class="fas fa-book-open mr-2"></i>学习科普法全文
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 脚本文件 -->
-    <script defer src="js/bootstrap.bundle.min.js"></script>
-    <script defer src="js/questions.js"></script>
-    <script defer src="js/main.js"></script>
+    <script>
+        // 科普法题库（扩展题目数量）
+        const allQuestions = [
+            {
+                text: "科学技术普及法的主要目的是什么？",
+                options: [
+                    "提高公民科学文化素质",
+                    "限制科技发展",
+                    "控制科技信息传播",
+                    "减少科技投资"
+                ],
+                correctAnswer: 0,
+                explanation: "科学技术普及法旨在提高全民科学素养，促进科学技术的普及和创新。"
+            },
+            {
+                text: "根据法律，每年9月被定为什么？",
+                options: [
+                    "科技创新月",
+                    "全国科普月",
+                    "技术发展月",
+                    "科学教育月"
+                ],
+                correctAnswer: 1,
+                explanation: "法律规定每年9月为全国科普月，旨在广泛开展科普活动。"
+            },
+            {
+                text: "科普法鼓励哪些主体参与科普工作？",
+                options: [
+                    "仅政府机构",
+                    "科研机构和教育机构",
+                    "政府、企业、社会组织和公民个人",
+                    "只有科学家和专家"
+                ],
+                correctAnswer: 2,
+                explanation: "科普法强调全社会共同参与科普工作的重要性。"
+            },
+            {
+                text: "科普法鼓励通过哪些方式开展科普活动？",
+                options: [
+                    "只能通过学术报告",
+                    "多种形式，如媒体、互联网、展览等",
+                    "仅限于书面宣传",
+                    "只能在学校进行"
+                ],
+                correctAnswer: 1,
+                explanation: "科普法支持多元化、多渠道的科普传播方式。"
+            },
+            {
+                text: "科普法特别强调对哪个群体的科普教育？",
+                options: [
+                    "仅针对成年人",
+                    "青少年和儿童",
+                    "老年人",
+                    "科研工作者"
+                ],
+                correctAnswer: 1,
+                explanation: "法律特别重视青少年和儿童的科学素养培养。"
+            },
+            {
+                text: "科普法规定，国家鼓励科技工作者做什么？",
+                options: [
+                    "只进行学术研究",
+                    "参与科普活动和科学传播",
+                    "保守科研成果",
+                    "仅在实验室工作"
+                ],
+                correctAnswer: 1,
+                explanation: "鼓励科技工作者积极参与科普活动，推广科学知识。"
+            },
+            {
+                text: "科普法对网络科普有什么要求？",
+                options: [
+                    "禁止网络科普",
+                    "鼓励利用互联网等新媒体开展科普",
+                    "仅允许官方网站科普",
+                    "网络科普需要特殊审批"
+                ],
+                correctAnswer: 1,
+                explanation: "法律支持并鼓励通过互联网等新媒体开展科普活动。"
+            },
+            {
+                text: "科普法如何保障科普经费？",
+                options: [
+                    "完全依赖社会捐赠",
+                    "国家和地方财政设立科普专项经费",
+                    "只依靠企业赞助",
+                    "不提供经费支持"
+                ],
+                correctAnswer: 1,
+                explanation: "国家和地方财政应当设立科普专项经费，支持科普事业发展。"
+            },
+            {
+                text: "科普法鼓励企业在科普中扮演什么角色？",
+                options: [
+                    "不需要参与科普",
+                    "可以自愿参与科普活动",
+                    "有义务开展科普活动",
+                    "只能提供资金支持"
+                ],
+                correctAnswer: 1,
+                explanation: "鼓励企业自愿参与科普活动，但不强制要求。"
+            },
+            {
+                text: "科普法对科普作品的创作有什么要求？",
+                options: [
+                    "只能由专家撰写",
+                    "鼓励科普作品创作，提高科普作品质量",
+                    "禁止科普作品出版",
+                    "科普作品需要政府审批"
+                ],
+                correctAnswer: 1,
+                explanation: "法律鼓励高质量科普作品的创作和传播。"
+            }
+        ];
+
+        class QuizApp {
+            constructor() {
+                this.totalQuestions = 10;
+                this.currentQuestionIndex = 0;
+                this.score = 0;
+                this.questions = [];
+                this.selectedAnswers = [];
+                this.startTime = Date.now();
+
+                this.questionText = document.getElementById('question-text');
+                this.answersContainer = document.getElementById('answers-container');
+                this.prevBtn = document.getElementById('prev-btn');
+                this.nextBtn = document.getElementById('next-btn');
+                this.progressBar = document.getElementById('progress-bar');
+                this.questionSection = document.getElementById('question-section');
+                this.resultSection = document.getElementById('result-section');
+                this.finalScoreElement = document.getElementById('final-score');
+                this.resultMessageElement = document.getElementById('result-message');
+                this.detailsContainer = document.getElementById('result-details');
+
+                this.initQuiz();
+                this.initEventListeners();
+                this.loadQuestion();
+            }
+
+            initQuiz() {
+                // 随机抽取10道题目
+                const shuffledQuestions = this.shuffleArray(allQuestions);
+                this.questions = shuffledQuestions.slice(0, this.totalQuestions);
+                this.selectedAnswers = new Array(this.totalQuestions).fill(null);
+            }
+
+            shuffleArray(array) {
+                const shuffled = [...array];
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                }
+                return shuffled;
+            }
+
+            initEventListeners() {
+                this.prevBtn.addEventListener('click', () => this.navigateQuestion(-1));
+                this.nextBtn.addEventListener('click', () => this.navigateQuestion(1));
+            }
+
+            loadQuestion() {
+                const question = this.questions[this.currentQuestionIndex];
+                this.questionText.textContent = question.text;
+                this.answersContainer.innerHTML = '';
+
+                question.options.forEach((option, index) => {
+                    const answerOption = document.createElement('div');
+                    answerOption.classList.add('answer-option');
+                    
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = 'answer';
+                    radio.id = `option-${index}`;
+                    radio.value = index;
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `option-${index}`;
+                    label.textContent = option;
+
+                    answerOption.appendChild(radio);
+                    answerOption.appendChild(label);
+
+                    answerOption.addEventListener('click', () => {
+                        radio.checked = true;
+                        this.selectedAnswers[this.currentQuestionIndex] = index;
+                    });
+
+                    this.answersContainer.appendChild(answerOption);
+                });
+
+                // 更新进度条
+                const progress = ((this.currentQuestionIndex + 1) / this.totalQuestions) * 100;
+                this.progressBar.style.width = `${progress}%`;
+
+                // 恢复之前的选择
+                const previousAnswer = this.selectedAnswers[this.currentQuestionIndex];
+                if (previousAnswer !== null) {
+                    const radioToCheck = document.getElementById(`option-${previousAnswer}`);
+                    if (radioToCheck) radioToCheck.checked = true;
+                }
+
+                // 控制上一题/下一题按钮
+                this.prevBtn.disabled = this.currentQuestionIndex === 0;
+                this.nextBtn.textContent = this.currentQuestionIndex === this.totalQuestions - 1 ? '完成' : '下一题';
+            }
+
+            navigateQuestion(direction) {
+                if (direction > 0 && this.currentQuestionIndex === this.totalQuestions - 1) {
+                    this.finishQuiz();
+                    return;
+                }
+
+                this.currentQuestionIndex = Math.max(0, Math.min(this.totalQuestions - 1, this.currentQuestionIndex + direction));
+                this.loadQuestion();
+            }
+
+            finishQuiz() {
+                this.calculateScore();
+                this.questionSection.style.display = 'none';
+                this.resultSection.style.display = 'block';
+                this.showDetailedResults();
+            }
+
+            calculateScore() {
+                this.score = this.selectedAnswers.reduce((total, answer, index) => {
+                    return answer === this.questions[index].correctAnswer ? total + 1 : total;
+                }, 0);
+
+                const scorePercentage = Math.round((this.score / this.totalQuestions) * 100);
+                const timeTaken = Math.round((Date.now() - this.startTime) / 60000);
+
+                this.finalScoreElement.textContent = `${this.score}/${this.totalQuestions}`;
+                
+                if (scorePercentage >= 80) {
+                    this.resultMessageElement.textContent = '非常优秀！你对科普法有深入了解。';
+                } else if (scorePercentage >= 60) {
+                    this.resultMessageElement.textContent = '不错的成绩，继续加油！';
+                } else {
+                    this.resultMessageElement.textContent = '建议再多学习科普法知识。';
+                }
+            }
+
+            showDetailedResults() {
+                const detailsContainer = document.createElement('div');
+                detailsContainer.classList.add('result-details');
+
+                this.questions.forEach((question, index) => {
+                    const resultItem = document.createElement('div');
+                    resultItem.classList.add('result-item');
+
+                    const isCorrect = this.selectedAnswers[index] === question.correctAnswer;
+                    resultItem.classList.add(isCorrect ? 'correct' : 'incorrect');
+
+                    resultItem.innerHTML = `
+                        <h4>第 ${index + 1} 题</h4>
+                        <p class="question-text">${question.text}</p>
+                        <p class="user-answer ${isCorrect ? 'correct' : 'incorrect'}">
+                            你的答案：${question.options[this.selectedAnswers[index]]}
+                        </p>
+                        <p class="correct-answer">
+                            正确答案：${question.options[question.correctAnswer]}
+                        </p>
+                        <p class="explanation">${question.explanation}</p>
+                    `;
+
+                    detailsContainer.appendChild(resultItem);
+                });
+
+                this.resultSection.appendChild(detailsContainer);
+            }
+        }
+
+        // 初始化应用
+        document.addEventListener('DOMContentLoaded', () => {
+            new QuizApp();
+        });
+    </script>
 </body>
 </html>
